@@ -26,5 +26,5 @@ workdir=$(mktemp -dt audit_archive_XXXXXX)
 trap 'rm -rf "$workdir"' EXIT
 
 cd "$workdir"
-unzip -q "$absArchive"
+tar -xf "$absArchive"
 "$absTool" "$@"

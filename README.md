@@ -9,7 +9,7 @@ This repo contains two tools:
 
     usage: fetch_repo_archives.sh [-b <branch>] -c <cachedir> [repourl [repourl...]]
 
-`fetch_repo_archives.sh` downloads zip archives of the current state of the specified branch or `master` to the specified cache directory, ready for further analysis later.
+`fetch_repo_archives.sh` downloads tar archives of the current state of the specified branch or `master` to the specified cache directory, ready for further analysis later.
 
 ## audit_repo_archive.sh
 
@@ -37,7 +37,7 @@ Once you have all the archives downloaded, you can run any utility you want agai
 
 For instance let's say you have a tool for finding sensitive information, `find_keys.sh`, and you have downloaded archives of all the repos you want to audit to a cache directory, `cache`:
 
-    for archive in cache/*.zip; do
+    for archive in cache/*.tar; do
         ./audit_repo_archive.sh -a "$archive" ./find_keys.sh
     done
 
