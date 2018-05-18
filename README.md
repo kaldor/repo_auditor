@@ -4,6 +4,7 @@ This repo contains two tools:
 
 1. fetch_repo_archives.sh
 2. audit_repo_archive.sh
+3. find_case_insensitive_conflicts_in_archives.sh
 
 ## fetch_repo_archives.sh
 
@@ -16,6 +17,12 @@ This repo contains two tools:
     usage: audit_repo_archive.sh -a <archive> <command> [cmdarg [cmdarg...]]
 
 `audit_repo_archive.sh` temporarily extracts the specified archive, switches the working directory to this temporary location and runs your command with your arguments in that working directory. When done, the temporary working directory is deleted, so if you want to persist data from your tool, make sure to specify an absolute path.
+
+## find_case_insensitive_conflicts_in_archives.sh
+
+    usage: find_case_insensitive_conflicts_in_archives.sh [archive [archive...]]
+
+`find_case_insensitive_conflicts_in_archives.sh` scans archives for files which are different on case sensitive systems, but which cannot be analysed on a case insensitive filesystem.
 
 ## Examples
 
