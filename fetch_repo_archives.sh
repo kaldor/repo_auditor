@@ -33,9 +33,5 @@ for repo in "$@"; do
     echo "Skipping $repo, $dest found locally, use -f to overwrite"
     continue
   fi
-  if ! git ls-remote --exit-code "$repo" > /dev/null; then
-    echo "Skipping $repo, could not fetch $branch"
-    continue
-  fi
   fetch_archive "$repo" "$dest"
 done
