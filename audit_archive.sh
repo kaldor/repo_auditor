@@ -19,12 +19,9 @@ shift $((OPTIND-1))
 
 absArchive=$(absolutePath "$archive")
 
-absTool=$(absolutePath $(which "$1"))
-shift 1
-
 workdir=$(mktemp -dt audit_archive_XXXXXX)
 trap 'rm -rf "$workdir"' EXIT
 
 cd "$workdir"
 tar -xf "$absArchive"
-"$absTool" "$@"
+"$@"

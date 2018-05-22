@@ -38,14 +38,26 @@ If you use [`bitbucket_deploy_key_util list_repos > repos.txt`][bitbucket_deploy
 
 You can download them all, four at a time, to a cache folder, `cache`, like so:
 
-    cat repos.txt | xargs -P 4 -n 1 ./fetch_repo_archives.sh -c cache
+    cat repos.txt | xargs -P 4 -n 1 fetch_repo_archives.sh -c cache
 
 Once you have all the archives downloaded, you can run any utility you want against the archives using `audit_repo_archive.sh`.
 
-For instance let's say you have a tool for finding sensitive information, `find_keys.sh`, and you have downloaded archives of all the repos you want to audit to a cache directory, `cache`:
+---
+
+For instance let's say you have a tool for finding sensitive information, `find_keys.sh` in your current directory, and you have downloaded archives of all the repos you want to audit to a cache directory, `cache`:
 
     for archive in cache/*.tgz; do
-        ./audit_repo_archive.sh -a "$archive" ./find_keys.sh
+        audit_repo_archive.sh -a "$archive" $(pwd)/find_keys.sh
+    done
+
+**Nota bene** the potential need for `$(pwd)` ahead of the tools name if you refer to it relatively. `audit_repo_archive.sh` executes its command using the temporarily extracted archive as current working directory.
+
+---
+
+If on the other hand the repo itself, contains a `test.sh` tool you would like to run, you should refer to it relatively, as it will be run relative to the repo:
+
+    for archive in cache/*.tgz; do
+        audit_repo_archive.sh -a "$archive" ./test.sh
     done
 
 [bitbucket_deploy_key_util]: https://github.com/kaldor/bitbucket_deploy_key_util
