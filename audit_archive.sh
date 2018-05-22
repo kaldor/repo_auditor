@@ -19,9 +19,11 @@ shift $((OPTIND-1))
 
 absArchive=$(absolutePath "$archive")
 
-workdir=$(mktemp -dt audit_archive_XXXXXX)
-trap 'rm -rf "$workdir"' EXIT
+tmp=$(mktemp -dt audit_archive_XXXXXX)
+trap 'rm -rf "$tmp"' EXIT
 
+workdir="$tmp/$(basename "$archive" .tgz)"
+mkdir "$workdir"
 cd "$workdir"
 tar -xf "$absArchive"
 "$@"
